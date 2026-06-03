@@ -1,0 +1,23 @@
+name: gVXR-CIL-ICTMS2026
+channels:
+    - conda-forge
+    - https://software.repos.intel.com/python/conda
+    - ccpi
+dependencies:
+    - python=3.12
+    - numpy
+    - pandas
+    - pillow
+    - matplotlib
+    - tifffile
+    - tqdm
+    - scikit-image
+    - cil
+    - astra-toolbox=*=cuda*
+    - tigre
+    - ipp
+    - json5
+    - plotly::plotly
+    - pip
+    - pip:
+        - gvxr
