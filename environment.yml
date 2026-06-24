@@ -19,6 +19,9 @@ dependencies:
     - ipp
     - json5
     - plotly::plotly
+    - jupyterlab
+    - ipykernel
+    - k3d
     - pip
     - pip:
         - gvxr
