@@ -13,6 +13,7 @@ dependencies:
     - tqdm
     - scikit-image
     - cil
+    - ccpi-regulariser
     - astra-toolbox=*=cuda*
     - tigre
     - ipp
