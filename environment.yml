@@ -27,6 +27,7 @@ dependencies:
     - zenodo_get >=1.6
     - progressbar
     - k3d
+    - SimpleITK
     - pip
     - pip:
         - gvxr
