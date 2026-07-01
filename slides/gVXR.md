@@ -151,7 +151,9 @@ Nucl. Instrum. Methods Phys. Res. Sect. B 2025, 568, 165804. doi: [10.1016/j.nim
 :::
 
 ::: column
-![3D polygons to 2D images with rasterisation](https://www.scratchapixel.com/images/rasterization/raytracing-raster2.png)
+<!-- From  https://www.scratchapixel.com/images/rasterization/raytracing-raster2.png)-->
+![3D polygons to 2D images with rasterisation](img/raytracing-raster2.png)<br/>
+(c) www.scratchapixel.com
 :::
 ::::
 
@@ -175,7 +177,9 @@ Nucl. Instrum. Methods Phys. Res. Sect. B 2025, 568, 165804. doi: [10.1016/j.nim
 :::
 
 ::: column
-![3D polygons to 2D images with ray tracing](https://www.scratchapixel.com/images/rasterization/raytracing-raster.png)
+<!-- From  https://www.scratchapixel.com/images/rasterization/raytracing-raster.png-->
+![3D polygons to 2D images with ray tracing](img/raytracing-raster.png)<br/>
+(c) www.scratchapixel.com
 :::
 ::::
 
@@ -1004,7 +1008,6 @@ Or visit <https://webct.io/>
 # Thanks
 
 - For your attentions;
-- The Ada support team, in particular Adam, Isaac, Jeremy and Peter; and 
 - Our sponsors
 
 ![CoSeC](img/CoSeC_Logo.png){height=60px} 
