@@ -35,7 +35,7 @@ lang: en-gb
 5. Is gVXR validated?
 5. How to simulate a CT acquisition?
 6. How to use gVXR?
-7. Other ways to use gVXR
+7. Other ways to use gVXR?
 
 
 <!--
@@ -57,7 +57,7 @@ contents...
 [https://gvirtualxray.sourceforge.io/](https://gvirtualxray.sourceforge.io/)
 
 - API (application programming interface)
-- relying on the **Beer--Lambert law**
+- relying on the **Beer-Lambert law**
 - to simulate X-ray images in realtime on a GPU (graphics processor
   unit)
 - using triangular meshes.
@@ -80,14 +80,14 @@ contents...
 ::: column
 Used in a wide range of applications, including:
 
-- real-time medical simulators,
-- proposing new imaging methods,
-- prototype algorithms,
-- studying noise removal techniques,
-- teaching particle physics and x-ray imaging (250 students / year),
-- predicting image quality and artifacts,
-- optimise scans, and 
-- a lot of ML/AI nowadays
+- real-time medical simulators;
+- proposing new imaging methods;
+- prototype algorithms;
+- studying noise removal techniques;
+- teaching particle physics and x-ray imaging (250 students / year);
+- predicting image quality and artifacts;
+- optimise scans; and 
+- a lot of ML/AI nowadays.
 :::
 
 ::: column
@@ -131,6 +131,72 @@ Nucl. Instrum. Methods Phys. Res. Sect. B 2025, 568, 165804. doi: [10.1016/j.nim
 ::: footer
 ^1^ Freud et al. (2006), “Fast and robust ray casting algorithms for virtual X-ray imaging”
 :::
+
+# Rasterisation
+
+::::: columns
+::: column
+✅ How it works
+
+ - Converts 3D geometry (triangles) into 2D pixels. 
+ - Projects objects onto a screen from the camera’s perspective.
+ - Determines which pixels belong to which triangles.
+ - Applies shading, textures, and lighting approximations.
+
+⚡ Key strengths
+
+- Very fast → ideal for real-time applications (games)
+- Hardware optimized (GPUs have dedicated raster units)
+- Efficient for large, complex scenes
+:::
+
+::: column
+![3D polygons to 2D images with rasterisation](https://www.scratchapixel.com/images/rasterization/raytracing-raster2.png)
+:::
+::::
+
+# Ray Tracing (Physically-Based Rendering)
+
+::::: columns
+::: column
+✅ How it works
+
+  - Simulates rays of light:
+    - Rays shoot from the camera into the scene
+    - They bounce between surfaces
+    - Lighting is calculated based on physical interactions
+  - Handles reflection, refraction, shadows naturally
+
+⚡ Key strengths
+
+  - Highly realistic lighting
+  - Accurate reflections, shadows, translucency
+  - Global illumination emerges naturally
+:::
+
+::: column
+![3D polygons to 2D images with ray tracing](https://www.scratchapixel.com/images/rasterization/raytracing-raster.png)
+:::
+::::
+
+# Ray Tracing vs Rasterisation
+
+::::: columns
+::: column
+|    Feature     |       Rasterisation        |         Ray Tracing          |
+|:--------------|:--------------------------|:----------------------------|
+|     Speed      |   Very fast (real-time)    |    Slower (compute heavy)    |
+|    Realism     |        Approximate         |       Highly realistic       |
+|    Lighting    |    Precomputed / tricks    |     Physically accurate      |
+|    Shadows     |        Shadow maps         |     Natural soft shadows     |
+|  Reflections   |  Screen-space / cube maps  |       True reflections       |
+|  Typical Use   |   Games, real-time apps    |  Film, high-end, RTX games   |
+:::
+
+::: column
+![Source: Intel blog titled "Real Time Ray-Tracing: The End of Rasterization?"](img/intel-ray-tracing-versus-raster.jpg){width=30%}
+:::
+::::
 
 # Cross-platform
 
@@ -177,7 +243,8 @@ pip install gvxr
 ```
 # Jupyter Notebook 1: Test installation
 - [test_installation.ipynb](https://github.com/TomographicImaging/gVXR-Tutorials/tree/main/notebooks/test_installation.ipynb)
-- Run the quick test script provided with gVirtualXray's Python package to make sure the installation is working well on your system.
+- Run the quick test scripts provided with gVirtualXray's Python package to make sure the installation is working 
+  well on your system.
 - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TomographicImaging/gVXR-Tutorials/blob/main/notebooks/test_installation.ipynb)
 
 ![](img/jupyter1.png){width=50%}<br/>
@@ -260,7 +327,8 @@ $$
 
 # Jupyter Notebook 3: Numpy integration
 - [numpy_integration.ipynb](https://github.com/TomographicImaging/gVXR-Tutorials/tree/main/notebooks/numpy_integration.ipynb)
-- Experiment with the Numpy integration to speed up the simulation.
+- Experiment with the Numpy integration to speed up the simulation by avoiding memory copies when the simulated data 
+  must be accessed in Python.
 - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TomographicImaging/gVXR-Tutorials/blob/main/notebooks/numpy_integration.ipynb)
 
 ![](img/jupyter3.png){width=50%}<br/>
@@ -301,11 +369,10 @@ table th:nth-of-type(2) {
 | False | Python lists to Numpy arrays | 124 | 8.09 ms | 13 s | 0.39 |
 | True | Numpy arrays | 1269 | 0.79 ms | 1 s | 3.96 |
 
-Computed on:
-
-- OS: GNU/Linux -- openSUSE Leap 16.0
-- GPU: NVIDIA GeForce RTX 4060 Ti/PCIe/SSE2
-- OpenGL version: 4.3.0 NVIDIA 595.80
+- Computed on:
+  - OS: GNU/Linux -- openSUSE Leap 16.0
+  - GPU: NVIDIA GeForce RTX 4060 Ti/PCIe/SSE2
+  - OpenGL version: 4.3.0 NVIDIA 595.80
 
 # 4. Built-in functionalities
 
@@ -332,6 +399,9 @@ Computed on:
 - In this notebook we practice, amongst other things, how to set simulation parameters related to the X-ray source 
   and detector; and
 - demonstrate how to load several STL files and use them all in the simulation (multi-material).
+- We aim to **replicate a digital radiograph (DR)** of the [Lungman anthropomorphic chest phantom](https://doi.org/10.
+  1117/1.JMI.5.1.013504) (Kyoto Kagaku, Tokyo, Japan) taken with a clinical X-ray machine by GE Healthcare (Chicago, Illinois, USA) at one of our local hospitals (Glan Clwyd). 
+- Parameters relevant to the simulation are extracted from the DICOM file, such as source-patient-distance and source-detector-distance.
 - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TomographicImaging/gVXR-Tutorials/blob/main/notebooks/multi_material-lungman_phantom.ipynb)
 
 ![](img/jupyter-multimaterial_lungman.png){width=50%}<br/>
@@ -741,12 +811,33 @@ void computeCTAcquisition(const std::string &  	aProjectionOutputPath,
 		unsigned int  	aVerboseLevel = 0 
 	)
 ```
-# Jupyter Notebook 7: Segmentation to simulation
+
+
+# Jupyter Notebooks 8 & 9: Segmentation to simulation
+- [magnification-simulation](https://github.com/TomographicImaging/gVXR-Tutorials/tree/main/notebooks/magnification-simulation.ipynb) 
+  - We explore how to exploit the magnification to compute the pixel size in the object plane rather than flat 
+    panel plane, 
+  - how the source-to-detector distance affects the image quality in terms of noise, and 
+  - the impact of sample material, noise and polychromatism on CT reconstructions.
+  - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TomographicImaging/gVXR-Tutorials/blob/main/notebooks/magnification-simulation.ipynb)
+ 
+- [magnification-reconstruction](https://github.com/TomographicImaging/gVXR-Tutorials/tree/main/notebooks/magnification-reconstruction.ipynb) 
+  - We will exploit the simulation data generated using [`notebooks/magnification-simulation.ipynb`](notebooks/magnification-simulation.ipynb) 
+  - to reconstruct the CT slices using the core imaging library (CIL), 
+  - use the zero-mean, unit-variance normalisation to rescale pixel values, 
+  - identify imaging artefacts by comparing pairs of images, and 
+  - extract intensity profiles to assess noise and cupping artefacts.
+  - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TomographicImaging/gVXR-Tutorials/blob/main/notebooks/magnification-reconstruction.ipynb)
+ 
+[//]: # (![]&#40;img/jupyter-magnification-simulation.png&#41;{width=50%}<br/>)
+
+
+# Jupyter Notebook 10: Segmentation to simulation
 - [segmentation-to-CT_scan-simulation](https://github.com/TomographicImaging/gVXR-Tutorials/tree/main/notebooks/segmentation-to-CT_scan-simulation.ipynb) 
 - Create a CT reconstruction from data simulated using a segmented image to model the sample.
 - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/TomographicImaging/gVXR-Tutorials/blob/main/notebooks/segmentation-to-CT_scan-simulation.ipynb)
  
-![](img/jupyter7.png){width=50%}<br/>
+![](img/jupyter-segmentation-to-CT_scan-simulation.png){width=50%}<br/>
 
 # Python script: Simulation to ML 
 - [simulated_data_generation.py](https://github.com/TomographicImaging/gVXR-training-dXCT2026/blob/main/scripts/morning/simulated_data_generation.py)
