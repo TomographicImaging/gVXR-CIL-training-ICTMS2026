@@ -28,6 +28,7 @@ dependencies:
     - progressbar
     - k3d
     - SimpleITK
+    - git
     - pip
     - pip:
         - gvxr
